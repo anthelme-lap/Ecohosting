@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A propos | Ecohosting{% endblock %}
+
+{% block body %}
+    {{ include ("partials/_breadcrumbs.html.twig",{'name':'A propos'}) }}
+
+{% for element in abouts %}
+    <div class="eduvibe-about-three-mission edu-mission-vision-area edu-section-gap border-bottom-1 bg-color-white">
+        <div class="container eduvibe-animated-shape">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="thumbnail mb--50">
+                        <div class="shape-image image-1">
+                            <img src="../../assets/images/{{element.image1}}" data-parallax='{"x": 0, "y": 80}' alt="Gallery Images">
+                        </div>
+                        <div class="shape-image image-2">
+                            <img src="../../assets/images/{{element.image2}}" data-parallax='{"x": 0, "y": -60}' alt="Gallery Images">
+                        </div>
+                        <div class="shape-image image-3">
+                            <img src="../../assets/images/{{element.image3}}" data-parallax='{"x": 0, "y": 80}' alt="Gallery Images">
+                        </div>
+                        <div class="shape-image image-4">
+                            <img src="../../assets/images/{{element.image4}}" data-parallax='{"x": 0, "y": -80}' alt="Gallery Images">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shape-dot-wrapper shape-wrapper d-xl-block d-none">
+                <div class="animated-image shape-image-1">
+                    <img src="../../assets/images/shapes/shape-04-01.png" alt="Shape Thumb" />
+                </div>
+                <div class="shape shape-1"><span class="shape-dot"></span></div>
+                <div class="shape shape-2"><span class="shape-dot"></span></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="our-mission">
+                        <div class="section-title text-start" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                            <span class="pre-title">Notre Mission</span>
+                            <h3 class="title">{{element.titlemission }}</h3>
+                            <p class="mt--30 mb--0">{{element.descriptionmission|raw}} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="our-vision">
+                        <div class="section-title text-start" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+                            <span class="pre-title">Notre Vision</span>
+                            <h3 class="title">{{element.titlevision}}</h3>
+                            <p class="mt--30 mb--0">{{element.descriptionvision|raw}}. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    </div>
+{% endfor %}   
+  
+{% endblock %}

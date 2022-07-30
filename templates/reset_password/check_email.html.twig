@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-mail envoyé | Ecohosting{% endblock %}
+
+{% block body %}
+<div class="login-register-page-wrapper edu-section-gap bg-color-white">
+    <div class="container checkout-page-style">
+        <div class="row g-5">
+            <div class="col-lg-6 mx-auto">
+                <div class="login-form-box">
+                    <p>
+                        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+                        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                    </p>
+                    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

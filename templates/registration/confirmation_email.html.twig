@@ -1,0 +1,18 @@
+<div class="login-register-page-wrapper edu-section-gap bg-color-white">
+    <div class="container checkout-page-style">
+        <div class="row g-5">
+            <div class="col-lg-6 mx-auto">
+                <div class="login-form-box">
+                    <h3 class="mb-30">Se connecter</h3>
+                    <h1>Salut! Veuillez confirmer votre e-mail!</h1>
+                    <p>
+                        Veuillez cliquer sur le lien pour confirmer votre adresse e-mail: <br><br>
+                        <a href="{{ signedUrl }}">Confirmer mon e-mail</a>.
+                        Ce lien exprire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+                    </p>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

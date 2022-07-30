@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription | Ecohosting{% endblock %}
+
+{% block body %}
+    
+{# On affiche le breadcrumbs #}
+{{ include ("partials/_breadcrumbs.html.twig",{'name':'S\'inscrire'}) }}
+<div class="login-register-page-wrapper edu-section-gap bg-color-white">
+    <div class="container checkout-page-style">
+        <div class="row g-5 ">
+            <div class="col-lg-6 mx-auto">
+                <div class="login-form-box">
+                    <h3 class="mb-30">S'inscrire</h3>
+                    {% for flash_error in app.flashes('verify_email_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+                     {{ form_start(registrationForm, {'attr': {'class':'login-form'}}) }}
+                        <div class="input-box mb--30">
+                            {{ form_row(registrationForm.name) }}
+                        </div>
+                        <div class="input-box mb--30">
+                           {{ form_row(registrationForm.firstname) }}
+                        </div>
+                        <div class="input-box mb--30">
+                            {{ form_row(registrationForm.email) }}
+                        </div>
+                        <div class="input-box mb--30">
+                            {{ form_row(registrationForm.password) }}
+                        </div>
+                        <div class="input-box">
+                            {{ form_row(registrationForm.agreeTerms) }}
+                            <label for="checkbox-2">J'ai lu & accepté les termes & conditions.</label>
+                        </div>
+                        <button class="rn-btn edu-btn w-100 mb--30" type="submit">
+                            <span>S'inscrire</span>
+                        </button>
+                     {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

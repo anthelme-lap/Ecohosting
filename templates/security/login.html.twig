@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion | Ecohosting{% endblock %}
+
+{% block body %}
+
+{{ include ("partials/_breadcrumbs.html.twig",{'name':'Se connecter'}) }}
+
+<div class="login-register-page-wrapper edu-section-gap bg-color-white">
+    <div class="container checkout-page-style">
+        <div class="row g-5">
+            <div class="col-lg-6 mx-auto">
+                <div class="login-form-box">
+                    <h3 class="mb-30">Se connecter</h3>
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </div>
+                    {% endif %}
+                    <form class="login-form"  method="POST">
+                        <div class="input-box mb--30">
+                            <input type="email" value="{{ last_username }}" placeholder="Adresse e-mail" name="email" id="inputEmail"  autocomplete="email" required autofocus>
+                        </div>
+                        <div class="input-box mb--30">
+                            <input type="password" name="password" id="inputPassword" placeholder="Mot de passe" autocomplete="current-password" required>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        </div>
+                        <div class="comment-form-consent input-box mb--30">
+                            <input type="checkbox" id="checkbox-1" name="_remember_me">
+                            <label for="checkbox-1">Se souvenir de moi</label>
+                        </div>
+                        <button class="rn-btn edu-btn w-100 mb--30" type="submit">
+                            <span>Se connecter</span>
+                        </button>
+                        <div class="input-box">
+                            <a href="{{path('app_forgot_password_request')}} " class="lost-password">Mot de passe oublié ?</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

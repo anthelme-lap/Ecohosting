@@ -1,0 +1,255 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {# On affiche le breadcrumbs #}
+    {{ include ("partials/_breadcrumbs.html.twig",{'name':'Detail Article'}) }}
+{% if post %}
+    <div class="edu-blog-details-area edu-section-gap bg-color-white">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 order-2 order-lg-1">
+                    <!-- Start Blog Sidebar Area  -->
+                    <aside class="edu-blog-sidebar">
+
+                        <!-- Start Single Widget  -->
+                        <div class="edu-blog-widget widget-search">
+                            <div class="inner">
+                                <h5 class="widget-title">Recherche</h5>
+                                <div class="content">
+                                    <form class="blog-search" action="#">
+                                        <input type="text" placeholder="Rechercher un article...">
+                                        <button class="search-button"><i class="icon-search-line"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Widget  -->
+
+                        <!-- Start Single Widget  -->
+                        <div class="edu-blog-widget mt--40 widget-categories">
+                            <div class="inner">
+                                <h5 class="widget-title">Catégories</h5>
+                                <div class="content">
+                                    <ul class="category-list">
+                                        {% for category in categories %}
+                                            {% if category.posts |length >0 %}
+                                                <li><a href="{{path('app_category_articles',{'id':category.id})}}">{{category.name}} <span>({{category.posts | length}} )</span></a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Widget  -->
+
+                        <!-- Start Single Widget  -->
+                        <div class="edu-blog-widget mt--40 widget-latest-post">
+                            <div class="inner">
+                                <h5 class="widget-title">Nouveau Article</h5>
+                                <div class="content latest-post-list">
+
+                                    <!-- Start Single Post  -->
+                                    {% for nouveau in nouveauPost %}
+                                        <div class="latest-post">
+                                            <div class="thumbnail">
+                                                <a href="blog-details.html">
+                                                    <img src="../../assets/images/{{nouveau.image}}" alt="Blog Images">
+                                                </a>
+                                            </div>
+                                            <div class="post-content">
+                                                <ul class="blog-meta">
+                                                    <li>{{nouveau.createdAt|date('d/m/y')}}</li>
+                                                </ul>
+                                                <h6 class="title"><a href="blog-details.html">Open Source Job Report Show More</a></h6>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    <!-- End Single Post  -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Widget  -->
+
+                        <!-- Start Single Widget  -->
+                        <div class="edu-blog-widget mt--40 widget-about">
+                            <div class="inner">
+                                <h5 class="widget-title">A propos de moi</h5>
+                                <div class="content">
+                                    <div class="about-wrapper">
+                                        <div class="thumbnail">
+                                            <img src="../../assets/images/koffi.png" alt="Blog Images">
+                                        </div>
+                                        <div class="about-content">
+                                            <h6 class="title">Anthelme Koffi</h6>
+                                            <p>Vesti at bulum nec the odio aea the dumm ipsumm ipsum that dolocons rsus malware suada fadolorit to consectetur</p>
+                                            <ul class="social-share icon-transparent justify-content-center">
+                                                <li><a href="#"><i class="icon-Fb"></i></a></li>
+                                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                                                <li><a href="#"><i class="icon-Pinterest"></i></a></li>
+                                                <li><a href="#"><i class="icon-Twitter"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Widget  -->
+
+                        <!-- Start Single Widget  -->
+                        <div class="edu-blog-widget mt--40 widget-tags">
+                            <div class="inner">
+                                <h5 class="widget-title">Tags</h5>
+                                <div class="content">
+                                    <div class="tag-list">
+                                        <a href="#">Design</a>
+                                        <a href="#">Course</a>
+                                        <a href="#">Education</a>
+                                        <a href="#">Art</a>
+                                        <a href="#">Development</a>
+                                        <a href="#">UI Design</a>
+                                        <a href="#">e-Learning</a>
+                                        <a href="#">Online Courses</a>
+                                        <a href="#">Finance</a>
+                                        <a href="#">Consulting</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Widget  -->
+                    </aside>
+                    <!-- End Blog Sidebar Area  -->
+                </div>
+                <div class="col-lg-8 order-1 order-lg-2">
+                    <div class="blog-details-1">
+
+                        <div class="content-blog-top">
+                            <div class="status-group">
+                                <a href="#" class="eduvibe-status status-05 color-primary w-600">
+                                {# {{post.getFkcategory.getValues}} #}
+                                {% for categories in post.getFkcategory.getValues %}
+                                    {{categories.name}},
+                                {% endfor %}
+                                
+                                </a>
+                            </div>
+                            <h4 class="title">{{post.title}}</h4>
+                            <ul class="blog-meta">
+                                <li><img src="../../assets/images/blog/author/author-small/author.png" alt="Blog Images"> Suanora Leoti</li>
+                                <li><i class="icon-calendar-2-line"></i>{{post.createdAt|date('d/m/y')}}</li>
+                                <li><i class="icon-discuss-line"></i>{{post.comments | length}} Commentaire(s)</li>
+                            </ul>
+                            <div class="thumbnail">
+                                <img class="radius-small w-100 mb--30" src="../../assets/images/{{post.image}}" alt="Blog Images">
+                            </div>
+                        </div>
+
+                        <div class="blog-main-content">
+                            <p>{{post.description|raw}} </p>
+                        </div>
+
+                        <!-- Start Comment Area  -->
+                        <div class="edu-comment-area mt--50">
+                            <h5 class="blog-page-title">
+                                {% if  post.comments | length > 0  %}
+                                    {{post.comments | length}} Commentaire(s)
+                                {% else %}
+                                    Il n'y a aucun commentaire pour cet article.
+                                {% endif %}
+                            </h5>
+                            <div class="comment-list-wrapper mt--40">
+                                <!-- Start Single Comment  -->
+                                {% for comment in post.comments %}
+                                    {% if comment.parent == null %}
+                                        <div class="comment">
+                                            <div class="thumbnail">
+                                                <img src="../../assets/images/course/student-review/student-1.png" alt="Comment Images">
+                                            </div>
+                                            <div class="comment-content">
+                                                <h6 class="title">{{comment.name}}</h6>
+                                                <span class="date">{{comment.createdAt|date()}}</span>
+                                                <p>{{comment.content}} </p>
+                                                <div class="reply-btn-wrapper">
+                                                    <a class="reply-btn" data-reply data-id="{{comment.id}}" href="#id_commentaire"><i class="icon-reply-all-fill"></i> Repondre</a>
+                                                </div>
+                                            
+                                                {% for replies in comment.replies %}
+                                                    {# {% if replies == null %} #}
+                                                        <div class="comment mt-4">
+                                                            <div class="thumbnail">
+                                                                <img src="../../assets/images/course/student-review/student-2.jpg" alt="Comment Images">
+                                                            </div>
+                                                            <div class="comment-content">
+                                                                <h6 class="title">{{replies.name}}</h6>
+                                                                <span class="date">Reponse le {{replies.createdAt|date()}}</span>
+                                                                <p>{{replies.content}} </p>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    
+                                                {% endfor %}
+                                            
+                                            
+                                                
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                               {% endfor %}
+                            </div>
+                        </div>
+                        <!-- End Comment Area  -->
+
+
+                        <!-- Start Comment Form  -->
+                        <div class="edu-comment-form mt--50">
+                            
+                            {{form_start(formComment, {'attr':{'class':'comment-form-style-1','id':'id_commentaire'}})}}
+                                <p class="comment-note">Votre adresse ne sera pas publié. Les champs requis sont marqués *</p>
+                                <div class="row g-5">
+                                    <div class="col-lg-6">
+                                        <div class="input-box">
+                                           {{form_row(formComment.name)}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-box">
+                                            {{form_row(formComment.email)}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-box">
+                                            {{form_row(formComment.content)}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="input-box">
+                                            {{form_row(formComment.parent)}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="comment-form-consent">
+                                            {{form_row(formComment.agree)}}
+                                            <label for="checkbox-1"> J'accepte de de laisser mes données (nom, email) sur ce site.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button class="rn-btn edu-btn w-100 mb--30" type="submit">
+                                            <span>Envoyer le commentaire</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            {{form_end(formComment)}}
+
+                        </div>
+                        <!-- End Comment Form  -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

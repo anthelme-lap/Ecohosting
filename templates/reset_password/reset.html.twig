@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser mot de passe | Ecohosting{% endblock %}
+
+{% block body %}
+<div class="login-register-page-wrapper edu-section-gap bg-color-white">
+    <div class="container checkout-page-style">
+        <div class="row g-5">
+            <div class="col-lg-6 mx-auto">
+                <div class="login-form-box">
+                    <h3 class="mb-30">Réinitialiser mot de passe</h3>
+                    {{ form_end(resetForm, {'attr': {'class':'login-form'}}) }}
+                        <div class="input-box mb--30">
+                           {{ form_row(resetForm.plainPassword) }}
+                        </div>
+                        <button class="rn-btn edu-btn w-100 mb--30" type="submit">
+                            <span>Réinitialiser mot de passe</span>
+                        </button>
+                    {{ form_end(resetForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}
