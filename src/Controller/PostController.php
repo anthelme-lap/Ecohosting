@@ -31,16 +31,20 @@ class PostController extends AbstractController
         $donnees = $this->postRepo->findAll();
         $category = $this->categoryRepo->findAll();
 
-        // pagination
-        $posts = $this->paginator->paginate($donnees,$request->query->getInt('page', 1),2);
+        
 
         $formSearch = $this->createForm(SearchPostType::class);
         $formSearch->handleRequest($request);
 
         if ($formSearch->isSubmitted() && $formSearch->isValid()) {
-            dd('ok');
+                $donnees = $this->postRepo->search(
+                    $formSearch->get('mot')->getData()
+            );
         }
-
+        
+        // pagination
+        $posts = $this->paginator->paginate($donnees,$request->query->getInt('page', 1),2);
+        
         return $this->render('post/index.html.twig',[
             'posts' => $posts,
             'categories' => $category,
@@ -119,12 +123,17 @@ class PostController extends AbstractController
         $formSearch = $this->createForm(SearchPostType::class);
         $formSearch->handleRequest($request);
 
-        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
-            dd('ok');
-        }
-         // pagination
-         $posts = $this->paginator->paginate($donnees,$request->query->getInt('page', 1),2);
+        
        
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $donnees = $this->postRepo->search(
+                $formSearch->get('mot')->getData()
+            );
+        }
+         
+        //pagination
+        $posts = $this->paginator->paginate($donnees,$request->query->getInt('page', 1),2);
+        
         return $this->render('post/index.html.twig',[
             'posts' => $posts,
             'categories' => $this->categoryRepo->findAll(),

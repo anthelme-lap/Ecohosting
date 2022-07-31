@@ -39,6 +39,18 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    public function search($mots)
+    {
+        $query = $this->createQueryBuilder('p');
+
+        if ($mots !== null) {
+            $query->where('MATCH_AGAINST(p.title, p.description) AGAINST (:mots boolean)>0 ')
+              ->setParameter('mots', $mots);
+        }
+
+        return $query->getQuery()->getResult();
+        
+    }
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
